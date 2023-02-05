@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scores</title>
+    <link rel = "stylesheet" type="text/css" href="w3.css"/>
+    <link rel = "stylesheet" type="text/css" href="style.css"/>
+</head>
+<body id = "body2" style="display: block; justify-content: center; text-align: center; width: 100%;">
+    
+    <div id = "Scores">
+        <a href = "index.html" class="w3-button w3-black" style="left:auto; right: auto; margin-bottom: 0px; margin-top: 20px;">Click here to play game</a>
+        <h1 id = "h1">HIGH SCORES</h1>
+
+    </div>
+    <script>
+        fetch('/getHighScores').then(function(indexes){
+            indexes.json().then(function(allHS){
+                //console.log(allHS);
+                var i = 0; //index #
+                for(let entry of allHS.index){
+                    var hsName = document.createElement('p'); 
+                    hsName.innerHTML = entry.Name + ": " + entry.Score;;
+                    hsName.className = "scoring";
+                    if(i % 2 == 0)
+                    {
+                        hsName.style.backgroundColor = "grey";
+                    }
+                    document.getElementById("Scores").appendChild(hsName);
+                    i++;
+                }
+            })
+        })
+    </script>
+</body>
+</html>

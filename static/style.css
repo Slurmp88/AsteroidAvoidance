@@ -1,0 +1,58 @@
+html,
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.canvas-container{
+    position: relative;
+    width: 800px;
+    height: auto;
+}
+
+.canvas{
+    position: absolute;
+}
+
+#button{
+    position:absolute;
+    left: auto;
+    right: auto;
+}
+
+#Scores{
+    width: 33.33%;
+    right: 33.33%;
+    left: 33.33%;
+    position: absolute;
+    text-align: center;
+    background-color: white;
+}
+
+#body{
+    background-image: url("images/stolen.jpg");
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+
+#body2{
+    background-image: url("images/stolen2.jpg");
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+
+.scoring{
+    position: relative;
+    margin: 0%;
+    padding-bottom: 4px;
+    left: auto;
+    right: auto;
+    width: 100%;
+    height: 40px;
+    font-size: 30px;
+    font-family: "Impact", sans-serif;
+}
+
+#h1{
+    font-family: "Impact", sans-serif;
+}

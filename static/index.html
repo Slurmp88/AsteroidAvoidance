@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Avoidance</title>
+    <link rel = "stylesheet" type="text/css" href="style.css"/>
+    <link rel = "stylesheet" type="text/css" href="w3.css"/>
+</head>
+<body id = "body";>
+    <script>
+         fetch('/getLastScore').then(function(index){
+            index.json().then(function(hs){
+                var lastScore = document.createElement('p'); 
+                lastScore.innerHTML = hs.score.Score;
+                lastScore.id = "LastScore";
+                document.getElementById("scoreHolder").appendChild(lastScore);
+            })
+        })
+        
+        fetch('/getHighScores').then(function(indexes){
+            indexes.json().then(function(allHS){
+                //console.log(allHS);
+                var i = 0; //index #
+                for(let entry of allHS.index){
+                    var hsName = document.createElement('p'); 
+                    hsName.innerHTML = entry.Name;
+                    hsName.id = `name${i}`;
+                    var hsScore = document.createElement('p'); 
+                    hsScore.innerHTML = entry.Score;
+                    hsScore.id = `score${i}`;
+                    document.getElementById("scoreHolder").appendChild(hsName);
+                    document.getElementById("scoreHolder").appendChild(hsScore);
+                    i++;
+                }
+            })
+        })
+
+        function checkForm()
+        {
+            if(document.getElementById("nameField").value == "")
+            {
+                event.preventDefault();
+                document.getElementById("error").innerHTML = "NAME CANNOT BE EMPTY";
+            }
+        }
+    </script>
+
+    <div class="canvas-container"  style = "text-align: center; background-color: white;">
+
+        <span style="height: 60px;"></span>
+        <canvas width="800" height="600" style="border:1px solid black; background-color: black;"></canvas>
+        <a href = "scores.html" class="w3-button w3-black" style="margin-bottom: 7px;">Click here to view High Scores</a>
+
+        <form method="post" action="/saveHighscore" class="highscore" onsubmit="return checkForm()">
+            <input type="text" placeholder= "Enter your name for High Score" id = "nameField" name = "Name" 
+            style="position:absolute; left:300px; top:400px; width:200px;" />
+            <input type="text" value="" id = "HighScore" name = "Score" style = "display: none";/>
+            <button style="position:absolute; left:350px; top:450px; width:100px;">Submit</button>
+            <span id = "error" style = "color: red; position:absolute; left:300px; top:490px; width:500px;"></span>
+        </form>
+        <div id="scoreHolder" style="display: none;"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
